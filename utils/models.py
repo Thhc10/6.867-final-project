@@ -28,7 +28,7 @@ class FashionMNISTCNN(nn.Module):
         x = self.conv1(x)
         x = self.conv2(x)
 
-        x = x.view(x.size(0), -1)
+        x = torch.flatten(x, start_dim=1)
         x = self.fc(x)
 
         return x
