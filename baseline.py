@@ -5,7 +5,7 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-import sys
+import sys, os
 import torch
 import numpy as np
 import pandas as pd
@@ -262,7 +262,9 @@ class FederatedBaseline(Baseline):
         Args:
             client_models (list[torch.nn.Module]): the client models
             malicious_upscale (float): scale factor for parameter updates
-        """    
+        """
+        os.makedirs("figures", exist_ok=True)
+        os.chmod("figures", 0o777)
         ### take simple mean of the weights of models ###
         safe_clients = self.defense.run(self.model, client_models, plot_name="fig.png")
         global_dict = self.model.state_dict()
